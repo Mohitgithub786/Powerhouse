@@ -16,11 +16,14 @@ app.use(morgan("dev"));
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow any localhost port
-      if (!origin || origin.startsWith("http://localhost:")) {
+      const allowedOrigins = [
+        "https://powerhouse-jade.vercel.app",
+        /http:\/\/localhost:\d+/
+      ];
+      if (!origin || allowedOrigins.some(ao => (typeof ao === 'string' ? ao === origin : ao.test(origin)))) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(null, true); // Temporarily allow all for easier debugging during setup
       }
     },
     credentials: true
