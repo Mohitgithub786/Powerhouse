@@ -121,12 +121,13 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             {gallery.map((item) => (
               <motion.div
-                key={item}
+                key={item.title}
                 whileHover={{ scale: 1.04, y: -8 }}
-                className="group relative flex h-48 items-end overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-800 to-slate-900 p-5 backdrop-blur-xl"
+                className="group relative flex h-64 items-end overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-800 to-slate-900 p-5 backdrop-blur-xl"
               >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_30%),linear-gradient(to_top,rgba(2,6,23,0.95),rgba(2,6,23,0.25))]" />
-                <p className="relative text-xl font-black">{item}</p>
+                <img src={item.img} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
+                <p className="relative z-10 text-xl font-black">{item.title}</p>
               </motion.div>
             ))}
           </div>
